@@ -44,19 +44,18 @@ function rocChart(id, data, options) {
   const format = d3.format('.2');
   const aucFormat = d3.format('.4r');
 
-  const x = d3.scale.linear().range([0, width]);
-  const y = d3.scale.linear().range([height, 0]);
-  const color = d3.scale.category10(); // d3.scale.ordinal().range(['steelblue', 'red', 'green', 'purple']);
+  const x = d3.scaleLinear().range([0, width]);
+  const y = d3.scaleLinear().range([height, 0]);
+  const color = d3.scaleOrdinal()
+    .range(d3.schemeCategory10); // d3.scaleOrdinal().range(['steelblue', 'red', 'green', 'purple']);
 
-  const xAxis = d3.svg.axis()
+  const xAxis = d3.axisTop()
     .scale(x)
-    .orient('top')
-    .outerTickSize(0);
+    .tickSizeOuter(0);
 
-  const yAxis = d3.svg.axis()
+  const yAxis = d3.axisRight()
     .scale(y)
-    .orient('right')
-    .outerTickSize(0);
+    .tickSizeOuter(0);
 
   // set the axis ticks based on input parameters,
   // if ticks or tickValues are specified
@@ -78,8 +77,8 @@ function rocChart(id, data, options) {
   // a function that returns a line generator
   function curve(data, tpr) {
 
-     const lineGenerator = d3.svg.line()
-      .interpolate(interpolationMode)
+     const lineGenerator = d3.line()
+      .curve(d3.curveBasis)
       .x(d => x(d[fpr]))
       .y(d => y(d[tpr]));
 
@@ -89,7 +88,7 @@ function rocChart(id, data, options) {
   // a function that returns an area generator
   function areaUnderCurve(data, tpr) {
 
-    const areaGenerator = d3.svg.area()
+    const areaGenerator = d3.area()
       .x(d => x(d[fpr]))
       .y0(height)
       .y1(d => y(d[tpr]));
@@ -197,17 +196,13 @@ function rocChart(id, data, options) {
   svg.append('line') 
     .attr('class', 'curve')         
     .style('stroke', 'black')
-    .attr({
-      'x1': 0,
-      'x2': width,
-      'y1': height,
-      'y2': 0
-    })
-    .style({
-      'stroke-width': 2,
-      'stroke-dasharray': '8',
-      'opacity': 0.4
-    })
+    .attr('x1', 0)
+    .attr('x2', width)
+    .attr('y1', height)
+    .attr('y2', 0)
+    .style('stroke-width', 2)
+    .style('stroke-dasharray', '8')
+    .style('opacity', 0.4);
 
   // draw the ROC curves
   function drawCurve(data, tpr, stroke){
@@ -244,10 +239,8 @@ function rocChart(id, data, options) {
     svg.append('path')
       .attr('class', 'area')
       .attr('id', `${tpr}Area`)
-      .style({
-        'fill': fill,
-        'opacity': 0
-      })
+      .style('fill', fill)
+      .style('opacity', 0)
       .attr('d', areaUnderCurve(data, tpr))
   }
 
