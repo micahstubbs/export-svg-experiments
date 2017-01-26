@@ -1,3 +1,9 @@
+an example that uses [SVG Crowbar](http://nytimes.github.io/svg-crowbar/) to extract an [SVG](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) from the page and download it as an `.svg` file
+
+inspired by this [stackoverflow answer](http://stackoverflow.com/a/18502749/1732222) 
+
+---
+
 A d3js [ROC](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) Chart.
 [Might be](http://datascience.stackexchange.com/questions/806/advantages-of-auc-vs-standard-accuracy) useful for evaluating models.
 

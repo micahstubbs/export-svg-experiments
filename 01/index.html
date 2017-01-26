@@ -33,10 +33,23 @@ path {
     z-index: 5070;
   }
 
+.download { 
+  background: darkgray; 
+  color: #FFF; 
+  font-weight: 600; 
+  border: 2px solid #FFF; 
+  border-radius: 8px;
+  padding: 6px; 
+  margin:4px;
+  position: fixed;
+  left: 187px;
+}
+
 </style>
 <body>
 
 <div id="roc"> </div>
+<button class="download" onClick="(function () { var e = document.createElement('script'); e.setAttribute('src', 'svg-crowbar.js'); e.setAttribute('class', 'svg-crowbar'); document.body.appendChild(e); })();"><!--⤋--><big>⇩</big> Download SVG</button>
 
 <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="rocChart.js"></script>
