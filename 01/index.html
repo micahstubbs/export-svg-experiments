@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+<meta charset='utf-8'>
 <head>
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300,100,900|Open+Sans:400,300,700,600,800' rel='stylesheet' type='text/css'>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.22.1/babel.min.js'></script>
+  <script src='https://d3js.org/d3.v3.min.js' charset='utf-8'></script>
+  <script src='rocChart.js'></script>
 </head>
 <style>
-
 body { 
   font-size: 12px; 
   font-family: 'Open Sans';
@@ -44,55 +46,48 @@ path {
   position: fixed;
   left: 187px;
 }
-
 </style>
 <body>
-
-<div id="roc"> </div>
-<button class="download" onClick="(function () { var e = document.createElement('script'); e.setAttribute('src', 'svg-crowbar.js'); e.setAttribute('class', 'svg-crowbar'); document.body.appendChild(e); })();"><!--⤋--><big>⇩</big> Download SVG</button>
-
-<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="rocChart.js"></script>
+  <div id='roc'> </div>
+  <button class="download" onClick="(function () { var e = document.createElement('script'); e.setAttribute('src', 'svg-crowbar.js'); e.setAttribute('class', 'svg-crowbar'); document.body.appendChild(e); })();">
+    <big>⇩</big> Download SVG
+  </button>
 <script>
+const margin = {top: 30, right: 61, bottom: 70, left: 61}; 
+const width = 470 - margin.left - margin.right;
+const height = 450 - margin.top - margin.bottom;
 
-var margin = {top: 30, right: 61, bottom: 70, left: 61}, 
-    width = 470 - margin.left - margin.right,
-    height = 450 - margin.top - margin.bottom;
+// fpr for 'false positive rate'
+// tpr for 'true positive rate'
 
-// fpr for "false positive rate"
-// tpr for "true positive rate"
-
-var rocChartOptions = {
-  "margin": margin,
-  "width": width,
-  "height": height,
-  "interpolationMode": "basis",
-  "fpr": "X",
-  "tprVariables": [
+const rocChartOptions = {
+  'margin': margin,
+  'width': width,
+  'height': height,
+  'interpolationMode': 'basis',
+  'fpr': 'X',
+  'tprVariables': [
     {
-      "name": "BPC",
-      "label": "Break Points"
+      'name': 'BPC',
+      'label': 'Break Points'
     },
     {
-      "name": "WNR",
-      "label": "Winners"
+      'name': 'WNR',
+      'label': 'Winners'
     },
     {
-      "name": "FSP",
-      "label": "First Serve %",
+      'name': 'FSP',
+      'label': 'First Serve %',
     },
     {
-      "name": "NPW",
-      "label": "Net Points Won"
+      'name': 'NPW',
+      'label': 'Net Points Won'
     }
   ], 
-  "animate": false,
-  "smooth": true
+  'animate': false,
+  'smooth': true
 }
 
-d3.json("data.json", function(error, data) {
-  rocChart("#roc", data, rocChartOptions)
-})
-
+d3.json('data.json', (error, data) => rocChart('#roc', data, rocChartOptions))
 </script>
 </body>
