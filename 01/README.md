@@ -2,6 +2,8 @@ an example that uses [SVG Crowbar](http://nytimes.github.io/svg-crowbar/) to ext
 
 inspired by this [stackoverflow answer](http://stackoverflow.com/a/18502749/1732222) 
 
+an alternate method that works with Firefox is demonstrated in [@currankelleher](https://twitter.com/currankelleher)'s nice [Download SVG from Data URL](http://bl.ocks.org/curran/7cf9967028259ea032e8) example
+
 ---
 
 A d3js [ROC](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) Chart.
